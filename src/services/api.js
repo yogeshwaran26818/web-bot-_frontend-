@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
   baseURL: process.env.NODE_ENV === 'production' 
-    ? 'https://webbot-backend.vercel.app/api' 
+    ? 'https://web-bot-backend.vercel.app/api' 
     : '/api'
 })
 
