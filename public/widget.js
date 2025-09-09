@@ -28,7 +28,7 @@
     
     button.onclick = function() {
       const currentUrl = window.location.href;
-      const chatUrl = `http://localhost:3000/external-chat?url=${encodeURIComponent(currentUrl)}`;
+      const chatUrl = `https://334fc0228d6a.ngrok-free.app/external-chat?url=${encodeURIComponent(currentUrl)}`;
       window.open(chatUrl, '_blank', 'width=400,height=600,scrollbars=yes,resizable=yes');
     };
     

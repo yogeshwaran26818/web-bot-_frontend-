@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import { useParams } from 'react-router-dom'
 import { queryRAG } from '../services/api'
@@ -9,6 +9,15 @@ export default function ChatBot() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const { getToken } = useAuth()
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages, loading])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -38,7 +47,7 @@ export default function ChatBot() {
       <div className="flex-1 p-4 overflow-y-auto">
         {messages.map((msg, idx) => (
           <div key={idx} className={`mb-4 ${msg.role === 'user' ? 'text-right' : 'text-left'}`}>
-            <div className={`inline-block p-3 rounded-lg max-w-xs ${
+            <div className={`block p-3 rounded-lg w-full ${
               msg.role === 'user' 
                 ? 'bg-blue-600 text-white' 
                 : 'bg-gray-200 text-gray-800'
@@ -54,6 +63,7 @@ export default function ChatBot() {
             </div>
           </div>
         )}
+        <div ref={messagesEndRef} />
       </div>
       
       <form onSubmit={handleSubmit} className="p-4 border-t flex gap-2">
