@@ -3,8 +3,7 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: import.meta.env.MODE === 'development'
     ? 'http://localhost:5000/api' 
-    : 'https://web-bot-backend.vercel.app/api', 
-  withCredentials: true
+    : 'https://web-bot-backend.vercel.app/api'
 });
 
 export const uploadLink = (url, token) =>
